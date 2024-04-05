@@ -18,6 +18,8 @@ import Amazonka.Prelude
 import Data.ByteArray (ByteArrayAccess, convert)
 import qualified Data.ByteArray.Encoding as ByteArray.Encoding
 
+-- TODO: Allow this to work with botan
+-- TODO: Use the base64 package
 encodeBase16 :: ByteArrayAccess a => a -> ByteString
 encodeBase16 = ByteArray.Encoding.convertToBase ByteArray.Encoding.Base16
 
