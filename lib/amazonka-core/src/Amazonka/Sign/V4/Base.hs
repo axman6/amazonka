@@ -14,6 +14,7 @@ import Amazonka.Lens ((%~), (<>~), (^.))
 import Amazonka.Prelude
 import Amazonka.Request
 import Amazonka.Types
+import qualified Data.Map.Strict as Map
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Builder as BSB
 import qualified Data.ByteString.Char8 as BS8
@@ -130,16 +131,11 @@ type Path = Tag "path" ByteString
 type Signature = Tag "signature" ByteString
 
 authorisation :: V4 -> ByteString
-authorisation V4 {..} =
-  mconcat
-    [ algorithm,
-      " Credential=",
-      toBS metaCredential,
-      ", SignedHeaders=",
-      toBS metaSignedHeaders,
-      ", Signature=",
-      toBS metaSignature
-    ]
+authorisation V4 {..} = mconcat
+  [ algorithm
+  , " Credential=", toBS metaCredential
+  , ", SignedHeaders=", toBS metaSignedHeaders
+  , ", Signature=", toBS metaSignature ]
 
 signRequest ::
   -- | Pre-signRequestd signing metadata.
